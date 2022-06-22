@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com-dotnet-core-aspnet:5.0 AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build 
+WORKDIR /Services
+COPY ["Catalog/Catalog.csproj","Services/Catalog/Catalog.csproj"]
+RUN dotnet restore "Services/Catalog/Catalog.csproj"
+COPY . .
+WORKDIR "Services/Catalog"
+RUN dotnet publish "Catalog.csproj" -c Release -o/app/build
+
+FROM build AS publish 
+RUN dotnet publish "Catalog/csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet","Catalog.dll"]
