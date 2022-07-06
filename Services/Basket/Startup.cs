@@ -1,7 +1,7 @@
-using Catalog.Data;
-using Catalog.Repositories;
 
-namespace Catalog
+using Basket.Repository;
+
+namespace Basket
 {
     public class Startup
     {
@@ -14,12 +14,15 @@ namespace Catalog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = _configuration.GetValue<string>("ConnectionStrings:Redis");
+            });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Catalog.API", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Basket.API", Version = "v1" });
             });
-            services.AddScoped<ICatalogContext, CatalogContext>();
-            services.AddScoped<IProductRepository, ProductRepository>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -34,11 +37,11 @@ namespace Catalog
             app.UseEndpoints(endpoints =>
           {
               endpoints.MapControllers();
-            //   endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
-            //   {
-            //       Predicate = _ => true,
-            //       ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            //   });
+              //   endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+              //   {
+              //       Predicate = _ => true,
+              //       ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+              //   });
           });
         }
     }
