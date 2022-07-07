@@ -25,10 +25,11 @@ namespace Basket.Controllers
         {
             return Ok(await _repository.UpdateBasket(basket));
         }
+        [HttpDelete("{userName}",Name ="DeleteBasket")]
         public async Task<ActionResult> Delete(string userName)
         {
             await _repository.DeleteBasket(userName);
-            return Ok();
+            return Ok("Deleted");
         }
 
     }

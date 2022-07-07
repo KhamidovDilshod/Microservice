@@ -4,6 +4,7 @@ namespace Basket.Entities
     public class ShoppingCart
     {
         public string Username { get; set; }
+        public string Date { get { return DateTime.Today.ToString(); } }
         public List<ShoppingCartItem> Items { get; set; } = new List<ShoppingCartItem>();
 
         public ShoppingCart()
