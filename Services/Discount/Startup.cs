@@ -1,5 +1,7 @@
 
 
+using Discount.Repositories;
+
 namespace Discount
 {
     public class Startup
@@ -13,6 +15,7 @@ namespace Discount
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<IDiscountRepository, DiscountRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Catalog.API", Version = "v1" });

@@ -1,6 +1,8 @@
 using Discount.Entities;
 namespace Discount.Repositories
 {
+    /**@Author:Dilshodbek Hamidov @Date 08.07.2022*/
+
     public interface IDiscountRepository
     {
         Task<Coupon> GetDiscount(string productName);

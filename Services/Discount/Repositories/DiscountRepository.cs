@@ -4,6 +4,7 @@ using Npgsql;
 
 namespace Discount.Repositories
 {
+    /**@Author:Dilshodbek Hamidov @Date 08.07.2022*/
     public class DiscountRepository : IDiscountRepository
     {
         public IConfiguration _configuration { get; }
@@ -21,9 +22,16 @@ namespace Discount.Repositories
             return true;
         }
 
-        public Task<bool> DeleteDiscount(string productName)
+        public async Task<bool> DeleteDiscount(string productName)
         {
-            throw new NotImplementedException();
+            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("ConnectionStrings:Postgres"));
+            var result = await connection.ExecuteAsync("DELETE FROM Coupon WHERE ProductName=@ProductName", new { ProductName = productName });
+            // throw new NotImplementedException();
+            if (result < 0)
+            {
+                return false;
+            }
+            return true;
         }
 
         public async Task<Coupon> GetDiscount(string productName)
@@ -42,8 +50,9 @@ namespace Discount.Repositories
         {
             using var connection = new NpgsqlConnection(_configuration.GetValue<string>("ConnectionStrings:Postgres"));
 
-            var result = await connection.ExecuteAsync("INSERT INTO Coupon (ProductName,Description,Amount) Values (@ProductName,@Description,@Amount)",
-            new { ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount });
+            var result = await connection.ExecuteAsync("UPDATE Coupon SET ProductName=@ProductName,Description=@Description,Amount=@Amount",
+             new { ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount }
+            );
             if (coupon == null)
             {
                 return false;
