@@ -1,6 +1,6 @@
 using Basket.Entities;
 
-namespace Basket.Repository
+namespace E_Commerce.Basket.Repository
 {
     public interface IBasketRepository
     {

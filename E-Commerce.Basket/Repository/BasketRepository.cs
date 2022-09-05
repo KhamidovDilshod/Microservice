@@ -1,20 +1,21 @@
-using System.Timers;
 using Basket.Entities;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 
 #pragma warning disable
-namespace Basket.Repository
+namespace E_Commerce.Basket.Repository
 {
     public class BasketRepository : IBasketRepository
     {
-        private DateTime dateTime;
+        private DateTime _dateTime;
         private readonly IDistributedCache _redisCache;
+
         public BasketRepository(IDistributedCache redisCache)
         {
             _redisCache = redisCache ?? throw new ArgumentNullException(nameof(redisCache));
         }
-        private List<string> keys = new List<string>();
+
+        private List<string> _keys = new List<string>();
 
         public Task ClearDbPerHour()
         {
@@ -29,13 +30,9 @@ namespace Basket.Repository
         public async Task<ShoppingCart> GetBasket(string userName)
         {
             var basket = await _redisCache.GetStringAsync(userName);
-            if (String.IsNullOrEmpty(basket))
-            {
-                return null;
-            }
-            return JsonConvert.DeserializeObject<ShoppingCart>(basket);
+            return string.IsNullOrEmpty(basket) ? null : JsonConvert.DeserializeObject<ShoppingCart>(basket);
         }
- 
+
         public async Task<ShoppingCart> UpdateBasket(ShoppingCart basket)
         {
             await _redisCache.SetStringAsync(basket.Username, JsonConvert.SerializeObject(basket));
@@ -44,16 +41,14 @@ namespace Basket.Repository
 
         public Task DailyCalculation()
         {
-            if (this.dateTime == DateTime.Today)
+            if (this._dateTime == DateTime.Today)
             {
                 return null;
             }
-            else
-            {
-                var overAll =
-                this.dateTime = DateTime.Today;
-                return null;
-            }
+
+            var overAll =
+                this._dateTime = DateTime.Today;
+            return Task.FromCanceled(new CancellationToken(true));
         }
     }
 }
