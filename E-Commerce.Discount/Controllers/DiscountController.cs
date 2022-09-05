@@ -1,5 +1,5 @@
-using Discount.Entities;
-using Discount.Repositories;
+using E_Commerce.Discount.Entities;
+using E_Commerce.Discount.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Discount.Controllers
