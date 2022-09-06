@@ -24,10 +24,8 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
         var coupon = await _discountRepository.GetDiscount(request.ProductName);
 
         if (coupon == null)
-        {
             throw new RpcException(new Status(StatusCode.NotFound,
                 $"Discount with ProductName={request.ProductName} not found"));
-        }
         _logger.LogInformation("Discount is successfully created. ProductName:{ProductName}", coupon.ProductName);
 
         var couponModel = _mapper.Map<CouponModel>(coupon);
@@ -61,6 +59,14 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
         {
             Success = deleted
         };
+        string responseString = getDiscount("");
+        return response;
+    }
+
+    private string getDiscount(string s)
+    {
+        var req = _discountRepository.GetDiscount(s);
+        var response = _mapper.Map<string>(req);
         return response;
     }
 }

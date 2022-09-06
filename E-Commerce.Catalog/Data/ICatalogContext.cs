@@ -1,10 +1,9 @@
 using Catalog.Entities;
 using MongoDB.Driver;
 
-namespace Catalog.Data
+namespace Catalog.Data;
+
+public interface ICatalogContext
 {
-    public interface ICatalogContext
-    {
-        IMongoCollection<Product> Products { get; }
-    }
+    IMongoCollection<Product> Products { get; }
 }

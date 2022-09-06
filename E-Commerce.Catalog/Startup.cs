@@ -1,41 +1,38 @@
 using Catalog.Data;
 using Catalog.Repositories;
 using E_Commerce.Catalog.Repositories;
+using Microsoft.OpenApi.Models;
 
-namespace E_Commerce.Catalog
+namespace E_Commerce.Catalog;
+
+public class Startup
 {
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        private IConfiguration _configuration { get; }
-        public Startup(IConfiguration configuration)
-        {
-            this._configuration = configuration;
+        _configuration = configuration;
+    }
 
-        }
-        public void ConfigureServices(IServiceCollection services)
+    private IConfiguration _configuration { get; }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddControllers();
+        services.AddScoped<ICatalogContext, CatalogContext>();
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Catalog.API", Version = "v1"}); });
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
         {
-            services.AddControllers();
-            services.AddScoped<ICatalogContext, CatalogContext>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Catalog.API", Version = "v1" });
-            });
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-          {
-              endpoints.MapControllers();
-          });
-        }
+
+        app.UseRouting();
+        app.UseAuthorization();
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
 }
