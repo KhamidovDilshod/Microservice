@@ -1,4 +1,5 @@
 using Basket.Entities;
+using E_Commerce.Basket.Entities;
 using E_Commerce.Basket.GrpcServices;
 using E_Commerce.Basket.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -32,12 +33,13 @@ public class BasketController : ControllerBase
         //: TODO : Communicate with Discount.gRPC
         // and Calculate latest prices of product into shopping cart
         //consume Discount gRPC
-        var result = await _repository.UpdateBasket(basket);
         foreach (var item in basket.Items)
         {
             var coupon = await _discountGrpcService.GetDiscount(item.ProductName);
             item.Price -= coupon.Amount;
         }
+
+        var result = await _repository.UpdateBasket(basket);
 
         return Ok(result);
     }

@@ -1,9 +1,9 @@
-﻿using Ordering.Domain.Common;
+﻿using MediatR;
 
 #pragma warning disable
-namespace Ordering.Application.Features.Orders.Queries.GetOrderList;
+namespace Ordering.Application.Features.Orders.Commands.CheckoutOrder;
 
-public class OrdersVm : EntityBase
+public class CheckoutOrderCommand : IRequest<int>
 {
     public string UserName { get; set; }
     public decimal TotalPrice { get; set; }

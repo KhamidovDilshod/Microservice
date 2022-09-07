@@ -1,4 +1,5 @@
 using Basket.Entities;
+using E_Commerce.Basket.Entities;
 
 namespace E_Commerce.Basket.Repository;
 
