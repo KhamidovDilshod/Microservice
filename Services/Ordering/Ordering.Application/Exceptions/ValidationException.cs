@@ -3,14 +3,14 @@ using FluentValidation.Results;
 
 namespace Ordering.Application.Exceptions;
 
-public class ValidationException : ApplicationException
+public class ValidException : ApplicationException
 {
-    public ValidationException() : base("One or more validation failures have occured")
+    public ValidException() : base("One or more validation failures have occured")
     {
         Errors = new Dictionary<string, string[]>();
     }
 
-    public ValidationException(IEnumerable<ValidationFailure> failures) : this()
+    public ValidException(IEnumerable<ValidationFailure> failures) : this()
     {
         Errors = failures
             .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
