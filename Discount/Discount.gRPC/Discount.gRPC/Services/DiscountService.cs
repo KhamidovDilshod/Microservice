@@ -59,7 +59,7 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
         {
             Success = deleted
         };
-        string responseString = getDiscount("");
+        var responseString = getDiscount("");
         return response;
     }
 

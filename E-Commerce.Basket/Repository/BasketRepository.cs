@@ -1,4 +1,3 @@
-using Basket.Entities;
 using E_Commerce.Basket.Entities;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;

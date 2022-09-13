@@ -1,7 +1,6 @@
 namespace Discount.gRPC.Entities;
 #pragma warning disable
 
-
 public class Coupon
 {
     public int Id { get; set; }

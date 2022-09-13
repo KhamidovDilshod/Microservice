@@ -8,9 +8,9 @@ namespace Ordering.Application.Features.Orders.Commands.DeleteOrder;
 
 public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand>
 {
-    private readonly IOrderRepository _orderRepository;
     private readonly ILogger<DeleteOrderCommandHandler> _logger;
     private readonly IMapper _mapper;
+    private readonly IOrderRepository _orderRepository;
 
     public DeleteOrderCommandHandler(IOrderRepository orderRepository, ILogger<DeleteOrderCommandHandler> logger,
         IMapper mapper)

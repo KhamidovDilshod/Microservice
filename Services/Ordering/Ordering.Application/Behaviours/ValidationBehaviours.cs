@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
 using MediatR;
-using Ordering.Application.Exceptions;
-using ValidationException=Ordering.Application.Exceptions.ValidException;
+using ValidationException = Ordering.Application.Exceptions.ValidException;
+
 namespace Ordering.Application.Behaviours;
 
-public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -23,10 +24,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
             var validationResults =
                 await Task.WhenAll(_validators.Select(v => v.ValidateAsync(context, cancellationToken)));
             var failure = validationResults.SelectMany(r => r.Errors).Where(f => f != null).ToList();
-            if (failure.Count != 0)
-            {
-                throw new ValidationException(failure);
-            }
+            if (failure.Count != 0) throw new ValidationException(failure);
         }
 
         return await next();

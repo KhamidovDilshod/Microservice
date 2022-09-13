@@ -6,8 +6,8 @@ namespace Ordering.Application.Features.Orders.Queries.GetOrderList;
 
 public class GetOrdersListQueryHandler : IRequestHandler<GetOrdersListQuery, List<OrdersVm>>
 {
-    private readonly IOrderRepository _orderRepository;
     private readonly IMapper _mapper;
+    private readonly IOrderRepository _orderRepository;
 
     public GetOrdersListQueryHandler(IOrderRepository orderRepository, IMapper mapper)
     {

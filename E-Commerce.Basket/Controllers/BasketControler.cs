@@ -1,4 +1,3 @@
-using Basket.Entities;
 using E_Commerce.Basket.Entities;
 using E_Commerce.Basket.GrpcServices;
 using E_Commerce.Basket.Repository;

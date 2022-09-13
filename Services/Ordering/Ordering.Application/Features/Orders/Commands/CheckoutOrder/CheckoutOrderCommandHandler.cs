@@ -10,10 +10,10 @@ namespace Ordering.Application.Features.Orders.Commands.CheckoutOrder;
 
 public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand, int>
 {
-    private readonly IOrderRepository _orderRepository;
-    private readonly IMapper _mapper;
     private readonly IEmailService _emailService;
     private readonly ILogger<CheckoutOrderCommandHandler> _logger;
+    private readonly IMapper _mapper;
+    private readonly IOrderRepository _orderRepository;
 
     public CheckoutOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, IEmailService emailService,
         ILogger<CheckoutOrderCommandHandler> logger)
@@ -36,7 +36,7 @@ public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand,
 
     private async Task SendMail(Order order)
     {
-        var email = new Email("dilshodbekkhamido@gmail.com", $"New Order", $"Order was created");
+        var email = new Email("dilshodbekkhamido@gmail.com", "New Order", "Order was created");
         try
         {
             await _emailService.SendEmail(email);

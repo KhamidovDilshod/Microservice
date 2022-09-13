@@ -1,5 +1,4 @@
-﻿using System.Net.Security;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 
 namespace Ordering.Application.Exceptions;
 

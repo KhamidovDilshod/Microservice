@@ -3,7 +3,6 @@ using Basket.Entities;
 namespace E_Commerce.Basket.Entities;
 #pragma warning disable
 
-
 public class ShoppingCart
 {
     public ShoppingCart()
