@@ -17,11 +17,10 @@ public static class InfrastructureServiceRegistration
         services.AddDbContext<OrderContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString") ?? string.Empty,
-                x => x.MigrationsAssembly("Ordering.Infrastructure"));
+                x => x.MigrationsAssembly(typeof(OrderContext).Assembly.FullName));
         });
         services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
         services.AddScoped<IOrderRepository, OrderRepository>();
-
         services.Configure<EmailSettings>(c => configuration.GetSection("EmailSettings"));
         services.AddTransient<IEmailService, EmailService>();
 

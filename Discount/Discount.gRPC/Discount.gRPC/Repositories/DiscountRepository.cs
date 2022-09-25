@@ -16,7 +16,7 @@ public class DiscountRepository : IDiscountRepository
 
     public async Task<bool> CreateDiscount(Coupon coupon)
     {
-        using var connection = new NpgsqlConnection(_configuration.GetValue<string>("ConnectionStrings:Postgres"));
+        await using var connection = new NpgsqlConnection(_configuration.GetValue<string>("ConnectionStrings:Postgres"));
         var affected = await connection.ExecuteAsync(
             "INSERT INTO Coupon (ProductName,Description,Amount) Values (@ProductName,@Description,@Amount)",
             new {coupon.ProductName, coupon.Description, coupon.Amount});
@@ -29,7 +29,6 @@ public class DiscountRepository : IDiscountRepository
             new NpgsqlConnection(_configuration.GetValue<string>("ConnectionStrings:Postgres"));
         var result = await connection.ExecuteAsync("DELETE FROM Coupon WHERE ProductName=@ProductName",
             new {ProductName = productName});
-        // throw new NotImplementedException();
         return result >= 0;
     }
 

@@ -1,0 +1,10 @@
+﻿version: "3.8"
+services:
+  sqlserver:
+    container_name: SQl_SERVER
+  environment:
+    environment:
+      - SQL_PASSWORD=user
+    restart: always
+    ports:
+      - 1433:1433

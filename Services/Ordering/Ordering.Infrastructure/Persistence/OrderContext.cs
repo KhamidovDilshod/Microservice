@@ -10,7 +10,8 @@ public class OrderContext : DbContext
     {
     }
 
-    public DbSet<Order> Orders { get; set; }
+
+    public DbSet<Order>? Orders { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
@@ -25,8 +26,9 @@ public class OrderContext : DbContext
                     entry.Entity.LastModifiedDate = DateTime.Now;
                     entry.Entity.LastModifiedBy = "swn";
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-
         return base.SaveChangesAsync(cancellationToken);
     }
 }
