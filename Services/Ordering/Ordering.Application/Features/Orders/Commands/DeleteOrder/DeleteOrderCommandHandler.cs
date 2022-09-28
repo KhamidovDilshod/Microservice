@@ -26,7 +26,7 @@ public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand>
         if (orderToDelete == null)
         {
             _logger.LogError("Order not exist on database");
-            throw new NotFoundException(nameof(orderToDelete), orderToDelete.Id);
+            throw new NotFoundException(nameof(orderToDelete),"Order Id");
         }
 
         await _orderRepository.DeleteAsync(orderToDelete);

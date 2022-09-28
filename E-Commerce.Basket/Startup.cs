@@ -4,6 +4,7 @@ using E_Commerce.Basket.GrpcServices;
 using E_Commerce.Basket.Repository;
 using MassTransit;
 using MassTransit.MultiBus;
+using OcelotApiGw.Middleware;
 
 namespace E_Commerce.Basket;
 
@@ -59,6 +60,7 @@ public class Startup
         app.UseRouting();
         app.UseSwagger();
         app.UseSwaggerUI();
+        app.AddMiddleware();
         app.UseAuthorization();
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }

@@ -32,6 +32,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "Blocks\EventBus.Messages\EventBus.Messages.csproj", "{2E129CD2-B15A-4B4B-ADCB-BD60E27AD278}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{3535D6F8-7087-4F48-A212-7F8B1F46918F}"
+	ProjectSection(SolutionItems) = preProject
+		ApiGateways\Microservice.postman_collection.json = ApiGateways\Microservice.postman_collection.json
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGw", "ApiGateways\OcelotApiGw\OcelotApiGw.csproj", "{2ACCC764-0DA2-49B1-BCD8-F7D999422F28}"
 EndProject

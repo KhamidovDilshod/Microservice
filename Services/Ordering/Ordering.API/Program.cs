@@ -1,5 +1,6 @@
 using EventBus.Messages.Common;
 using MassTransit;
+using OcelotApiGw.Middleware;
 using Ordering.Application;
 using Ordering.EventBusConsumer;
 using Ordering.Extensions;
@@ -52,6 +53,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.AddMiddleware();
 
 app.UseAuthentication();
 app.UseAuthorization();

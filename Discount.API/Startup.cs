@@ -1,4 +1,5 @@
 using E_Commerce.Discount.Repositories;
+using OcelotApiGw.Middleware;
 
 namespace E_Commerce.Discount;
 
@@ -29,6 +30,7 @@ public class Startup
         app.UseSwaggerUI();
         app.UseRouting();
         app.UseAuthorization();
+        app.AddMiddleware();
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();

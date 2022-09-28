@@ -1,0 +1,341 @@
+{
+	"info": {
+		"_postman_id": "26a61121-5f3a-4665-ac27-ca816381b621",
+		"name": "Microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19397146"
+	},
+	"item": [
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "Get Catalog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/v1/Catalog",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"v1",
+								"Catalog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/v1/Catalog/602d2149e773f2a3990b47f6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"v1",
+								"Catalog",
+								"602d2149e773f2a3990b47f6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Catalog",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"602d2149e773f2a3990b47f6\",\r\n  \"name\": \"string\",\r\n  \"category\": \"string\",\r\n  \"summary\": \"string\",\r\n  \"description\": \"string\",\r\n  \"imageFile\": \"string\",\r\n  \"price\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/v1/Catalog",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"v1",
+								"Catalog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Catalog",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/v1/Catalog/602d2149e773f2a3990b47f6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"v1",
+								"Catalog",
+								"602d2149e773f2a3990b47f6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Basket",
+			"item": [
+				{
+					"name": "get basket",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5000/api/v1/basket/dilshod",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"basket",
+								"dilshod"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update basket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\":\"dilshod\",\r\n     \"items\": [\r\n        {\r\n            \"quantity\": 2,\r\n            \"color\": \"Midnight\",\r\n            \"price\": 1250.0,\r\n            \"productId\": \"6234758465780361247856345\",\r\n            \"productName\": \"Hp Victus 16\"\r\n        },\r\n         {\r\n            \"quantity\": 2,\r\n            \"color\": \"Midnight\",\r\n            \"price\": 1250.0,\r\n            \"productId\": \"43254235345234534\",\r\n            \"productName\": \"Macbook\"\r\n        }\r\n    ],\r\n    \"totalPrice\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5000/api/v1/basket",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"basket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"dilshod\",\r\n  \"totalPrice\": 2300,\r\n  \"firstName\": \"Dilshodbek\",\r\n  \"lastName\": \"Hamidov\",\r\n  \"emailAddress\": \"dilshodbekkhamidov@gmail.com\",\r\n  \"addressLine\": \"Tashkent,Uzbekistan\",\r\n  \"country\": \"Uzbekistan\",\r\n  \"zipCode\": \"100023\",\r\n  \"cardName\": \"Mastercard\",\r\n  \"cardNumber\": \"1234 1234 1234 1234\",\r\n  \"expiration\": \"03/27\",\r\n  \"cvv\": \"sww\",\r\n  \"paymentMethod\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5000/api/v1/Basket/Checkout",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"Basket",
+								"Checkout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete basket",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\":\"User\",\r\n     \"items\": [\r\n        {\r\n            \"quantity\": 2,\r\n            \"color\": \"Silver\",\r\n            \"price\": 2300.0,\r\n            \"productId\": \"6234758465780361247856345\",\r\n            \"productName\": \"Macbook\"\r\n        },\r\n         {\r\n            \"quantity\": 2,\r\n            \"color\": \"Silver\",\r\n            \"price\": 2300.0,\r\n            \"productId\": \"6234758465780361247856345\",\r\n            \"productName\": \"Macbook\"\r\n        },\r\n         {\r\n            \"quantity\": 2,\r\n            \"color\": \"Silver\",\r\n            \"price\": 2300.0,\r\n            \"productId\": \"6234758465780361247856345\",\r\n            \"productName\": \"Macbook\"\r\n        },\r\n         {\r\n            \"quantity\": 2,\r\n            \"color\": \"Silver\",\r\n            \"price\": 2300.0,\r\n            \"productId\": \"6234758465780361247856345\",\r\n            \"productName\": \"Macbook\"\r\n        },\r\n         {\r\n            \"quantity\": 2,\r\n            \"color\": \"Silver\",\r\n            \"price\": 2300.0,\r\n            \"productId\": \"6234758465780361247856345\",\r\n            \"productName\": \"Macbook\"\r\n        }\r\n    ],\r\n    \"totalPrice\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5000/api/v1/basket/Iphone",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"basket",
+								"Iphone"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Discount",
+			"item": [
+				{
+					"name": "get discount",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5002/api/v1/discount/discount/iphone",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"api",
+								"v1",
+								"discount",
+								"discount",
+								"iphone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create discount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ProductName\":\"Iphone\",\r\n    \"Description\":\"Macbook Pro M2\",\r\n    \"Amount\":2000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5002/api/v1/discount",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"api",
+								"v1",
+								"discount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update discount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ProductName\":\"Macbook\",\r\n    \"Description\":\"Macbook Pro M2\",\r\n    \"Amount\":2000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5002/api/v1/discount/update",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"api",
+								"v1",
+								"discount",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete discount",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5002/api/v1/discount/delete/Macbook",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"api",
+								"v1",
+								"discount",
+								"delete",
+								"Macbook"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

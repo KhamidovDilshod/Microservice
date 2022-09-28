@@ -2,6 +2,7 @@ using Catalog.Data;
 using Catalog.Repositories;
 using E_Commerce.Catalog.Repositories;
 using Microsoft.OpenApi.Models;
+using OcelotApiGw.Middleware;
 
 namespace E_Commerce.Catalog;
 
@@ -32,6 +33,7 @@ public class Startup
         }
 
         app.UseRouting();
+        app.AddMiddleware();
         app.UseAuthorization();
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
