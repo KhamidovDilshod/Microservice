@@ -1,10 +1,12 @@
 ﻿using System.Net;
+using MassTransit.Internals;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ordering.Application.Features.Orders.Commands.CheckoutOrder;
 using Ordering.Application.Features.Orders.Commands.DeleteOrder;
 using Ordering.Application.Features.Orders.Commands.UpdateOrder;
 using Ordering.Application.Features.Orders.Queries.GetOrderList;
+using Shared.Responses;
 
 namespace Ordering.Controllers;
 
@@ -20,7 +22,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet("{userName}", Name = "GetOrder")]
-    [ProducesResponseType(typeof(IEnumerable<OrdersVm>), (int) HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(IEnumerable<OrdersVm>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<OrdersVm>>> GetOrdersByUserName(string userName)
     {
         var query = new GetOrdersListQuery(userName);
@@ -33,23 +35,23 @@ public class OrderController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> DeleteOrder(int id)
     {
-        var command = new DeleteOrderCommand() {Id = id};
+        var command = new DeleteOrderCommand() { Id = id };
         await _mediator.Send(command);
-        return NoContent();
+        return Ok(new CommonMessage(id: id, message: "Order Deleted"));
     }
 
     [HttpPut(Name = "UpdateOrder")]
     public async Task<ActionResult> UpdateOrder([FromBody] UpdateOrderCommand command)
     {
-        await _mediator.Send(command);
-        return NoContent();
+        var result = await _mediator.Send(command);
+        return Ok(new CommonMessage(id: command.Id, message: "Order updated"));
     }
 
     [HttpPost(Name = "CheckoutOrder")]
-    [ProducesResponseType((int) HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<ActionResult<int>> CheckoutOrder([FromBody] CheckoutOrderCommand command)
     {
         var result = await _mediator.Send(command);
-        return Ok(result);
+        return Ok(new CommonMessage(id: result, message: "Checkout created"));
     }
 }

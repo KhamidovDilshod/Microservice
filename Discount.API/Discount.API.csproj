@@ -21,6 +21,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ApiGateways\OcelotApiGw\OcelotApiGw.csproj" />
+      <ProjectReference Include="..\Blocks\Shared\Shared.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 using E_Commerce.Discount.Entities;
 using E_Commerce.Discount.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Responses;
 
 namespace E_Commerce.Discount.Controllers;
 
@@ -28,18 +29,21 @@ public class DiscountController : ControllerBase
     [HttpDelete("delete/{productName}")]
     public async Task<ActionResult<bool>> DeleteDiscount(string productName)
     {
-        return await Repository.DeleteDiscount(productName);
+        var result = await Repository.DeleteDiscount(productName);
+        return Ok(new CommonMessage(message: $"Deleted :{result}", id: 0));
     }
 
     [HttpPost]
-    public async Task<ActionResult<bool>> CreateDiscount([FromBody] Coupon coupon)
+    public async Task<ActionResult> CreateDiscount([FromBody] Coupon coupon)
     {
-        return await Repository.CreateDiscount(coupon);
+        bool result = await Repository.CreateDiscount(coupon);
+        return Ok(new CommonMessage(id: coupon.Id, message: result.ToString()));
     }
 
     [HttpPost("update")]
-    public async Task<bool> UpdateDiscount(Coupon coupon)
+    public async Task<ActionResult> UpdateDiscount(Coupon coupon)
     {
-        return await Repository.UpdateDiscount(coupon);
+        bool result = await Repository.UpdateDiscount(coupon);
+        return Ok(new CommonMessage(id: coupon.Id, message: result.ToString()));
     }
 }
