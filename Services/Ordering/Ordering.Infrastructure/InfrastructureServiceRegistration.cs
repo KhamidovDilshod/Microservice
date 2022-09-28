@@ -18,7 +18,7 @@ public static class InfrastructureServiceRegistration
         {
             options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString") ?? string.Empty,
                 x => x.MigrationsAssembly(typeof(OrderContext).Assembly.FullName));
-        });
+        }, ServiceLifetime.Transient);
         services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.Configure<EmailSettings>(c => configuration.GetSection("EmailSettings"));

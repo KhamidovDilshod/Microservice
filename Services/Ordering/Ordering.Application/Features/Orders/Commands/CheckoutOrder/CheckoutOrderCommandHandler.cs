@@ -43,7 +43,7 @@ public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand,
         }
         catch (Exception e)
         {
-            _logger.LogInformation($"Order {order.Id} failed due to an error with the email service:${e.Message}");
+            _logger.LogInformation($"Order {order.Id} failed due to an error with the email service:{e.Message}");
         }
     }
 }

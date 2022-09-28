@@ -10,6 +10,10 @@ public class OrderContext : DbContext
     {
     }
 
+    public OrderContext()
+    {
+    }
+
 
     public DbSet<Order>? Orders { get; set; }
 
@@ -21,14 +25,17 @@ public class OrderContext : DbContext
                 case EntityState.Added:
                     entry.Entity.CreatedByDate = DateTime.Now;
                     entry.Entity.CreatedBy = "swn";
+                    entry.Entity.LastModifiedBy = "swn";
+                    entry.Entity.LastModifiedDate = DateTime.Now;
                     break;
                 case EntityState.Modified:
+                    entry.Entity.CreatedByDate = DateTime.Now;
+                    entry.Entity.CreatedBy = "swn";
                     entry.Entity.LastModifiedDate = DateTime.Now;
                     entry.Entity.LastModifiedBy = "swn";
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
+
         return base.SaveChangesAsync(cancellationToken);
     }
 }

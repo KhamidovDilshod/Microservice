@@ -1,6 +1,9 @@
 ﻿using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Ordering.Application.Features.Orders.Commands.CheckoutOrder;
+using Ordering.Application.Features.Orders.Commands.DeleteOrder;
+using Ordering.Application.Features.Orders.Commands.UpdateOrder;
 using Ordering.Application.Features.Orders.Queries.GetOrderList;
 
 namespace Ordering.Controllers;
@@ -23,5 +26,30 @@ public class OrderController : ControllerBase
         var query = new GetOrdersListQuery(userName);
         var orders = await _mediator.Send(query);
         return Ok(orders);
+    }
+
+    [HttpDelete("{id}", Name = "DeleteOrder")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> DeleteOrder(int id)
+    {
+        var command = new DeleteOrderCommand() {Id = id};
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
+    [HttpPut(Name = "UpdateOrder")]
+    public async Task<ActionResult> UpdateOrder([FromBody] UpdateOrderCommand command)
+    {
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
+    [HttpPost(Name = "CheckoutOrder")]
+    [ProducesResponseType((int) HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> CheckoutOrder([FromBody] CheckoutOrderCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
     }
 }

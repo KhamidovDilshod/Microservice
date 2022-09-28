@@ -24,12 +24,14 @@ public class BasketRepository : IBasketRepository
 
     public async Task<ShoppingCart> GetBasket(string userName)
     {
+        Console.WriteLine(userName);
         var basket = await _redisCache.GetStringAsync(userName);
         return string.IsNullOrEmpty(basket) ? null : JsonConvert.DeserializeObject<ShoppingCart>(basket);
     }
 
     public async Task<ShoppingCart> UpdateBasket(ShoppingCart basket)
     {
+        Console.WriteLine(basket.Username);
         await _redisCache.SetStringAsync(basket.Username, JsonConvert.SerializeObject(basket));
         return await GetBasket(basket.Username);
     }

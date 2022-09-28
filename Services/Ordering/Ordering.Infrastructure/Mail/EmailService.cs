@@ -21,7 +21,7 @@ public class EmailService : IEmailService
 
     public async Task<bool> SendEmail(Email email)
     {
-        var client = new SendGridClient(_emailSettings.ApiKey);
+        var client = new SendGridClient("AC9b33033c3793529b96eca725f3402e59");
         var subject = email.Subject;
         var to = new EmailAddress(email.To);
         var emailBody = email.Body;

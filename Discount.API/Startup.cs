@@ -15,18 +15,18 @@ public class Startup
     {
         services.AddControllers();
         services.AddScoped<IDiscountRepository, DiscountRepository>();
-        // services.AddSwaggerGen(c =>
-        // {
-        //     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Catalog.API", Version = "v1" });
-        // });
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Catalog.API", Version = "v1" });
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
             app.UseDeveloperExceptionPage();
-        // app.UseSwagger();
-        // app.UseSwaggerUI();
+        app.UseSwagger();
+        app.UseSwaggerUI();
         app.UseRouting();
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
