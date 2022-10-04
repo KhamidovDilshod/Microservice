@@ -22,11 +22,11 @@ public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand>
 
     public async Task<Unit> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
     {
-        var orderToDelete = await _orderRepository.GetByIdAsync(request.Id);
+        var orderToDelete = _orderRepository.GetById(request.Id);
         if (orderToDelete == null)
         {
             _logger.LogError("Order not exist on database");
-            throw new NotFoundException(nameof(orderToDelete),"Order Id");
+            throw new NotFoundException(nameof(orderToDelete), "Order Id");
         }
 
         await _orderRepository.DeleteAsync(orderToDelete);

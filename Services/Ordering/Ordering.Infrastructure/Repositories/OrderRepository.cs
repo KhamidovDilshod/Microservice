@@ -13,9 +13,11 @@ public class OrderRepository : RepositoryBase<Order>, IOrderRepository
 
     public async Task<IEnumerable<Order>> GetOrderByUserName(string userName)
     {
-        var orderList = await _dbContext.Orders
+        if (DbContext.Orders == null) throw new NullReferenceException();
+        var orderList = await DbContext.Orders
             .Where(o => o.UserName == userName)
             .ToListAsync();
         return orderList;
+
     }
 }

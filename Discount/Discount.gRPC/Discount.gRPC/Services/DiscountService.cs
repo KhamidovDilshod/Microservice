@@ -59,14 +59,6 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
         {
             Success = deleted
         };
-        var responseString = getDiscount("");
-        return response;
-    }
-
-    private string getDiscount(string s)
-    {
-        var req = _discountRepository.GetDiscount(s);
-        var response = _mapper.Map<string>(req);
         return response;
     }
 }

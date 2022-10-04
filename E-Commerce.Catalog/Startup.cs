@@ -1,5 +1,5 @@
-using Catalog.Data;
 using Catalog.Repositories;
+using E_Commerce.Catalog.Data;
 using E_Commerce.Catalog.Repositories;
 using Microsoft.OpenApi.Models;
 using OcelotApiGw.Middleware;

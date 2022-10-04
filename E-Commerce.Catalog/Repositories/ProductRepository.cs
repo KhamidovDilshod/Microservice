@@ -1,6 +1,6 @@
-using Catalog.Data;
-using Catalog.Entities;
 using Catalog.Repositories;
+using E_Commerce.Catalog.Data;
+using E_Commerce.Catalog.Entities;
 using MongoDB.Driver;
 
 namespace E_Commerce.Catalog.Repositories;

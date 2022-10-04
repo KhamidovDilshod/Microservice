@@ -34,8 +34,7 @@ public class ExceptionMw
         await context.Response.WriteAsync(new ErrorDetails
         {
             StatusCode = context.Response.StatusCode,
-            Message = "Internal Server error ",
-            ErrorMessage = $"{exception.Message}"
+            Message = $"An error occured while process your request : {exception.Message}",
         }.ToString());
     }
 }

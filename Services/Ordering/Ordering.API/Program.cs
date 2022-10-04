@@ -1,4 +1,6 @@
+using System.Reflection;
 using EventBus.Messages.Common;
+using FluentValidation.AspNetCore;
 using MassTransit;
 using OcelotApiGw.Middleware;
 using Ordering.Application;
@@ -7,11 +9,21 @@ using Ordering.Extensions;
 using Ordering.Infrastructure;
 using Ordering.Infrastructure.Persistence;
 
+#pragma warning disable CS0618
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(options =>
+{
+    // Validate child properties and root collection elements
+    options.ImplicitlyValidateChildProperties = true;
+    options.ImplicitlyValidateRootCollectionElements = true;
+
+    // Automatic registration of validators in assembly
+    options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+});
 
 //General Configuration
 builder.Services.AddEndpointsApiExplorer();

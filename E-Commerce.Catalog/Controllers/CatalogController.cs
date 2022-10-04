@@ -1,6 +1,6 @@
 using System.Net;
-using Catalog.Entities;
 using Catalog.Repositories;
+using E_Commerce.Catalog.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Controllers;

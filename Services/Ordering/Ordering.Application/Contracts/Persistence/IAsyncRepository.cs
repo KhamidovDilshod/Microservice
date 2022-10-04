@@ -16,7 +16,7 @@ public interface IAsyncRepository<T> where T : EntityBase
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<Expression<Func<T, object>>> includes = null,
         bool disableTracking = true);
 
-    Task<T> GetByIdAsync(int id);
+    T GetById(int id);
     Task<T> AddAsync(T entity);
     Task UpdateAsync(T entity);
     Task DeleteAsync(T entity);

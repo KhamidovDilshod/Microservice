@@ -1,4 +1,4 @@
-using Catalog.Entities;
+using E_Commerce.Catalog.Entities;
 
 namespace Catalog.Repositories;
 
